@@ -18,6 +18,12 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static('public'));
 
+// 👇加这一段
+app.get('/', (req, res) => {
+  res.redirect('/register.html');
+});
+
+
 const PORT = process.env.PORT || 3000;
 const DATABASE_FILE = process.env.DATABASE_FILE || './data/data.db';
 const ADMIN_SECRET = process.env.ADMIN_SECRET || 'change_me_admin_secret';
