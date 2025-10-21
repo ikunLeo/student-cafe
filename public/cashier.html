@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cashier - Student Cafe</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+  <h3>收银台</h3>
+  <form id="f" class="mb-3">
+    <div class="mb-2">
+      <label class="form-label">卡 UID</label>
+      <input class="form-control" id="uid" required placeholder="可手填或由读卡器填入">
+    </div>
+    <div class="mb-2">
+      <label class="form-label">金额（元）</label>
+      <input class="form-control" id="amt" type="number" step="0.01" required>
+    </div>
+    <div class="mb-2">
+      <label class="form-label">PIN（如用户设置了PIN）</label>
+      <input class="form-control" id="pin" minlength="4" maxlength="4" type="password">
+    </div>
+    <button class="btn btn-danger">扣款</button>
+  </form>
+  <pre id="out"></pre>
+<script>
+function uuid(){return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c=>(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));}
+document.getElementById('f').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const payload = {
+    uid: document.getElementById('uid').value.trim().toUpperCase(),
+    amount_cents: Math.round(parseFloat(document.getElementById('amt').value)*100),
+    nonce: uuid(),
+    terminal_id: 'T1',
+    pin: document.getElementById('pin').value.trim() || undefined
+  };
+  const r = await fetch('/api/pay', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+  document.getElementById('out').textContent = JSON.stringify(await r.json(), null, 2);
+});
+</script>
+</body>
+</html>

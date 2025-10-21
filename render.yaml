@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: student-cafe-basic
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: ADMIN_SECRET
+        generateValue: true
+      - key: DAILY_LIMIT_CENTS
+        value: 20000
+      - key: DATABASE_FILE
+        value: /data/data.db
+    disk:
+      name: data-disk
+      mountPath: /data
+      sizeGB: 1
