@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Cafe - 首页</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif; margin: 0; color: #222; }
+    header { padding: 32px 20px; background: linear-gradient(135deg,#2e7d32,#66bb6a); color: #fff; }
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 0; opacity: .9; }
+    main { padding: 24px 20px; max-width: 960px; margin: 0 auto; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .links a { display: inline-block; margin-right: 12px; margin-bottom: 8px; padding: 10px 14px; border-radius: 8px; background: #2e7d32; color: #fff; text-decoration: none; font-weight: 600; }
+    .links a.secondary { background: #1976d2; }
+    footer { padding: 24px 20px; text-align: center; color: #666; border-top: 1px solid #eee; margin-top: 24px; }
+  </style>
+  <meta name="description" content="Student Cafe 学生自治小店 - 注册、充值、收银与管理后台。">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%232e7d32'/%3E%3Ctext x='50' y='58' text-anchor='middle' font-size='44' fill='white' font-family='Arial'%3ES%3C/text%3E%3C/svg%3E">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';">
+</head>
+<body>
+  <header>
+    <h1>Student Cafe</h1>
+    <p>学生自治小店 · Node.js + Express + SQLite（余额与学校系统不互通）      created by Leo Wang On 2025-10-28 </p>
+    <p>任何问题请微信联系 打开ic28搜leo即可添加</p>
+  </header>
+  <main>
+    <section class="card">
+      <h3>使用说明</h3>
+      <p>这是最小可运行版本，提供注册/充值/消费/记录导出等功能。请遵循当地法律法规及校内管理制度，获得必要授权后再上线使用。</p>
+      <div class="links" style="margin-top:12px;">
+        <a href="register.html">注册/绑定</a>
+        <a href="topup.html" class="secondary">充值</a>
+        <a href="cashier.html">收银</a>
+        <a href="admin.html" class="secondary">管理后台</a>
+      </div>
+    </section>
+
+    <div class="cards">
+      <section class="card">
+        <h3>数据与存储</h3>
+        <p>默认使用 SQLite。本地为 <code>./data/data.db</code>，生产部署建议设置 <code>DATABASE_FILE=/data/data.db</code> 并挂载持久化存储。</p>
+      </section>
+      <section class="card">
+        <h3>环境变量</h3>
+        <p>PORT、ADMIN_SECRET、DAILY_LIMIT_CENTS、DATABASE_FILE。详见仓库中的 <code>.env.example</code> 与 <code>DEPLOYMENT.md</code>。</p>
+      </section>
+      <section class="card">
+        <h3>安全与合规</h3>
+        <p>请使用强 <code>ADMIN_SECRET</code>，合理设置每日限额，张贴使用提示，必要时征得监护人/学校同意。</p>
+      </section>
+    </div>
+  </main>
+  <footer>
+    © <span id="y"></span> Student Cafe · 最小可运行版本
+  </footer>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <!-- 纯静态首页，避免泄露实现细节，无任何第三方资源引用 -->
+  <!-- 入口链接已在上方：/register.html /topup.html /cashier.html /admin.html -->
+</body>
+</html>
+
+

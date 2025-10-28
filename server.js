@@ -20,7 +20,7 @@ app.use(express.static('public'));
 
 // 👇加这一段
 app.get('/', (req, res) => {
-  res.redirect('/register.html');
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
 });
 
 // 便捷路由重定向
