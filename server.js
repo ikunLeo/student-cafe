@@ -23,6 +23,23 @@ app.get('/', (req, res) => {
   res.redirect('/register.html');
 });
 
+// 便捷路由重定向
+app.get('/register', (req, res) => {
+  res.redirect('/register.html');
+});
+
+app.get('/topup', (req, res) => {
+  res.redirect('/topup.html');
+});
+
+app.get('/cashier', (req, res) => {
+  res.redirect('/cashier.html');
+});
+
+app.get('/admin', (req, res) => {
+  res.redirect('/admin.html');
+});
+
 
 const PORT = process.env.PORT || 3000;
 const DATABASE_FILE = process.env.DATABASE_FILE || './data/data.db';
